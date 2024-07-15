@@ -113,7 +113,6 @@ public class Principal {
     private DatosResultado getDatosLibro() {
         System.out.println("Escribe el nombre del libro que deseas buscar");
         var nombreLibro = teclado.nextLine();
-        System.out.println(URL_BASE + nombreLibro.replace(" ", "%20"));
         var json = consumoApi.obtenerDatos(URL_BASE + nombreLibro.replace(" ", "%20"));
         DatosResultado datos = conversor.obtenerDatos(json, DatosResultado.class);
         return datos;
