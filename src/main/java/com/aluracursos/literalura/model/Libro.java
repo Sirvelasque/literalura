@@ -10,7 +10,7 @@ public class Libro {
     private Long id;
     @Column(unique = true)
     private String titulo;
-    private List<String> idiomas;
+    private String idiomas;
     private Integer descargas;
     @ManyToOne(cascade = CascadeType.ALL)
     private Autor autor;
@@ -21,7 +21,7 @@ public class Libro {
         DatosLibro primerLibro = datos.results().get(0);
         this.id = (long) primerLibro.id();
         this.titulo = primerLibro.title();
-        this.idiomas = primerLibro.idiomas();
+        this.idiomas = primerLibro.idiomas().get(0);
         this.autor = new Autor(primerLibro.autores().get(0), this);
         this.descargas = primerLibro.descargas();
     }
@@ -42,11 +42,11 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public List<String> getIdiomas() {
+    public String getIdiomas() {
         return idiomas;
     }
 
-    public void setIdiomas(List<String> idiomas) {
+    public void setIdiomas(String idiomas) {
         this.idiomas = idiomas;
     }
 

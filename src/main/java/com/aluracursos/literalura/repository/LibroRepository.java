@@ -16,4 +16,10 @@ public interface LibroRepository extends JpaRepository<Libro,Long> {
 
     @Query("SELECT a FROM Autor a")
     List<Autor> mostrarAutores();
+
+    @Query("SELECT a FROM Autor a WHERE (:year BETWEEN a.fechaNacimiento AND a.fechaFallecimiento) OR (:year >= a.fechaNacimiento AND a.fechaFallecimiento IS NULL)")
+    List<Autor> listarvivos(Integer year);
+
+    @Query("SELECT l FROM Libro l WHERE l.idiomas = :idioma")
+    List<Libro> listarPorIdioma(String idioma);
 }
